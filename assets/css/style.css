@@ -1,0 +1,57 @@
+
+            .attribution { font-size: 11px; text-align: center; }
+            .attribution a { color: hsl(228, 45%, 44%); }
+            button, input, optgroup, select, textarea {
+            margin: 0;
+            font-family: inherit;
+            font-size: inherit;
+            margin-left: 5px;
+            line-height: inherit;
+            margin-top: 5px;
+        }
+
+.flex-container {
+  display: flex;
+  
+}
+*, ::after, ::before {
+    box-sizing: border-box;
+    margin-right: 67px;
+    padding-right: 2px;
+}
+
+
+body {
+        background-color:hsl(0, 0%, 86%);
+      }
+
+
+.container{
+    background-color:hsl(0, 0%, 94%);
+    border: 2px solid hsl(0, 0%, 86%);
+    border-radius: 25px;
+}
+.error{
+    border: 2px solid  hsl(0, 100%, 67%);
+    width: 110px;
+    border-radius: 5px;
+}
+
+input{
+border: 2px solid hsl(0, 0%, 86%);
+width: 100px;
+border-radius: 5px;
+}
+
+*{
+    font-family: 'Poppins', sans-serif;
+
+}
+
+.puprel{
+    color:  hsl(259, 100%, 65%);
+
+}
+.btn{
+    margin-left: 4px;
+}

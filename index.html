@@ -8,53 +8,41 @@
   <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
   <title>Frontend Mentor | Age calculator app</title>
-
-  <!-- Feel free to remove these styles or customise in your own stylesheet 👍 -->
-  <style>
-    .attribution { font-size: 11px; text-align: center; }
-    .attribution a { color: hsl(228, 45%, 44%); }
-    button, input, optgroup, select, textarea {
-    margin: 0;
-    font-family: inherit;
-    font-size: inherit;
-    margin-left: 5px;
-    line-height: inherit;
-    margin-top: 5px;
-}
-
-
-  </style>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/style.css">
+  
 </head>
-<body>
+<body> 
   
   <div id="app" class="container">
-    <div class = "row">
-    <form action="" class="col col-md-3 col-lg-3">
-      <div class = "col-auto"><span>DAY</span>
-       <span>MOUNTH</span><span>YEAR</span></div>
-
-       <div class ="col  col-md-3 col-lg-3"><input type="number" v-model="day" id="day" min = 1 max =31>
-      <input type="number" v-model="mounth" id="mounth" min=1 max=12>
-      <input type="number" v-model="year" id = "year"> </div>
-      <div class = "row">
-      <div class="col align-self-center">
-      <button class= 'btn btn-success' @click="caculate()">submit</button></div>
-      </div>
+    <div class="flex-container">
+      <div  :class="{  'text-danger': danger }" >DAY</div>
+      <div  :class="{ 'text-danger':  danger}" >MONTH</div>
+      <div  :class="{ 'text-danger':danger }" >YEAR</div>
+    </div>
+    
+    <form action="#" class="flex-container">
+    
+      <input :class="[status]" type="number" v-model="day" id="day" min = 1 max =31>
+      <input :class="[status]" type="number" v-model="mounth" id="mounth" min=1 max=12>
+      <input :class="[status]" type="number" v-model="year" id = "year">
+      
+      <div class ="row mx-2">
+      <button class= 'btn btn-success' @click="caculate()">submit</button>
     </div>
 
     </form>
 
     <hr></hr>
     <p>{{message}}</p>
-    <h4>{{result.years}} years</span>
+    <h2> <span class = "puprel">{{result.years}} </span> year</h2>
     <br>
-    <h4>{{result.months}} months</span>
+    <h2> <span class = "puprel">{{result.months}}</span> month</h2>
     <br>
-    <h4> {{result.days}} days</span> 
-
-
+    <h2><span  class = "puprel"> {{result.days}}</span> days</h2>
   </div>
-
  
   <script>
     const { createApp } = Vue
@@ -64,12 +52,13 @@
       data() {
         return {
           message: 'Hello Vue!',
-          year : 2000,
-          mounth :1,
-          day:1,
-          result :{days:"--",months:"--",years:"--"}
-          ,
+          year :"" ,
+          mounth :"",
+          day:"",
+          result :{days:"--",months:"--",years:"--"},
+          
           status :"" ,
+          danger:false ,
       
         }},
         methods: {
@@ -101,18 +90,21 @@
       if (value >31 ||value<1){
       this.status ="error";
       this.message = "enter valid value";
+      this.danger = 'er';
     }
     },
     mounth(value){
-      if  (mounth>12 ||value<1){
+      if  (value>12 ||value<1){
       this.status ="error";
+      this.danger = true;
       this.message = "enter valid value";
     }
   },
     year(value){
     now = new Date().getFullYear();
-    if  (year>now||year<1){
+    if  (value>now||value<1){
       this.status ="error";
+      this.danger = true;
       this.message = "enter valid value";
     }},
     }}).mount('#app')
