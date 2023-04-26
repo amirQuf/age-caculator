@@ -1,6 +1,6 @@
 
-            .attribution { font-size: 11px; text-align: center; }
-            .attribution a { color: hsl(228, 45%, 44%); }
+            .attribution { font-size: 11px!important; text-align: center; }
+            .attribution a { font-size: 11px!important; color: hsl(228, 45%, 44%); }
             button, input, optgroup, select, textarea {
             margin: 0;
             font-family: inherit;
@@ -29,8 +29,10 @@ body {
 .container{
     background-color:hsl(0, 0%, 94%);
     border: 2px solid hsl(0, 0%, 86%);
-    border-radius: 25px;
+    border-radius: 5% 5% 28% 5%;
+    
 }
+
 .error{
     border: 2px solid  hsl(0, 100%, 67%);
     width: 110px;
@@ -40,18 +42,52 @@ body {
 input{
 border: 2px solid hsl(0, 0%, 86%);
 width: 100px;
+height: 60px;
 border-radius: 5px;
 }
 
 *{
     font-family: 'Poppins', sans-serif;
-
+    text-align: center;
+    font-size: 32px;
+    font-weight: 600;
+    /* Weights: 400i, 700, 800i; */
 }
 
 .puprel{
     color:  hsl(259, 100%, 65%);
+    font-weight: 800;
+    font-style: italic;
+}
+h1{
+    font-weight: 800;
+    font-style: oblique;
 
+
+    text-align: justify;
+    color:hsl(0, 0%, 8%);
 }
-.btn{
-    margin-left: 4px;
+
+
+span {
+    margin-top: 10px;
+    font-size: 32px;
+    font-weight: 300px;
+    font-style: italic;
+    color:  hsl(0, 1%, 44%);
 }
+
+img {
+ background-color: hsl(259, 100%, 65%); 
+ border-radius: 50%;  
+ float: right;
+ padding: 30px;
+}
+
+img:hover {
+    background-color: hsl(0, 0%, 8%); 
+    border-radius: 50%;  
+    float: right;
+    padding: 30px;
+   }
+   

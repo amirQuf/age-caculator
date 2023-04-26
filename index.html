@@ -18,9 +18,9 @@
   
   <div id="app" class="container">
     <div class="flex-container">
-      <div  :class="{  'text-danger': danger }" >DAY</div>
-      <div  :class="{ 'text-danger':  danger}" >MONTH</div>
-      <div  :class="{ 'text-danger':danger }" >YEAR</div>
+      <div  :class="{  'text-danger': danger }" ><span  class ="text">DAY</span></div>
+      <div  :class="{ 'text-danger':  danger}" ><span class ="text">MONTH</span></div>
+      <div  :class="{ 'text-danger':danger }" ><span class ="text">YEAR</span></div>
     </div>
     
     <form action="#" class="flex-container">
@@ -28,20 +28,18 @@
       <input :class="[status]" type="number" v-model="day" id="day" min = 1 max =31>
       <input :class="[status]" type="number" v-model="mounth" id="mounth" min=1 max=12>
       <input :class="[status]" type="number" v-model="year" id = "year">
-      
-      <div class ="row mx-2">
-      <button class= 'btn btn-success' @click="caculate()">submit</button>
-    </div>
+       
+   
 
     </form>
-
-    <hr></hr>
-    <p>{{message}}</p>
-    <h2> <span class = "puprel">{{result.years}} </span> year</h2>
-    <br>
-    <h2> <span class = "puprel">{{result.months}}</span> month</h2>
-    <br>
-    <h2><span  class = "puprel"> {{result.days}}</span> days</h2>
+    <div class="col"><hr></hr><img src="assets/images/icon-arrow.svg" clsss ="img-fluid rounded float-left" alt=""   @click="caculate()" ></div>
+    
+    <!-- <p>{{message}}</p> -->
+    <h1><strong><span class = "puprel">{{result.years}} </span> Years</strong></h1>
+    
+    <h1> <strong><span class = "puprel">{{result.months}}</span> Months</strong></h1>
+   
+    <h1><strong><span  class = "puprel">{{result.days}}</span> Days</strong></h1>
   </div>
  
   <script>
@@ -66,11 +64,6 @@
     
     event.preventDefault();
     const today = new Date(); 
-    if (this.year>today.getFullYear()||this.year<1
-    ||this.mount>31||this.mounth<1||
-    this.day>31 ||this.ay<1){
-      return false;
-    }
             b = new Date(this.year, this.mounth,this.day);
             console.log(b);
             diff = today.getTime()-b.getTime();
@@ -87,13 +80,23 @@
 },
    watch:{
     day(value){
+      if(value==""){
+      this.status ="error";
+      this.message = "This field is required";
+      this.danger = true;  
+      }
       if (value >31 ||value<1){
       this.status ="error";
       this.message = "enter valid value";
-      this.danger = 'er';
+      this.danger = true;
     }
     },
     mounth(value){
+      if(value==""){
+      this.status ="error";
+      this.message = "This field is required";
+      this.danger = true;  
+      }
       if  (value>12 ||value<1){
       this.status ="error";
       this.danger = true;
@@ -101,6 +104,11 @@
     }
   },
     year(value){
+    if(value==""){
+      this.status ="error";
+      this.message = "This field is required";
+      this.danger = true;  
+      }
     now = new Date().getFullYear();
     if  (value>now||value<1){
       this.status ="error";
