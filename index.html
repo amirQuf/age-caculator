@@ -18,22 +18,35 @@
   
   <div id="app" class="container">
     <div class="flex-container">
-      <div  :class="{  'text-danger': danger }" ><span  class ="text">DAY</span></div>
-      <div  :class="{ 'text-danger':  danger}" ><span class ="text">MONTH</span></div>
-      <div  :class="{ 'text-danger':danger }" ><span class ="text">YEAR</span></div>
-    </div>
-    
-    <form action="#" class="flex-container">
-    
-      <input :class="[status]" type="number" v-model="day" id="day" min = 1 max =31>
-      <input :class="[status]" type="number" v-model="mounth" id="mounth" min=1 max=12>
-      <input :class="[status]" type="number" v-model="year" id = "year">
-       
-   
+      <div  :class="{  'text-danger': danger }" >
+        <p>DAY<p/>
+        </div>
 
-    </form>
-    <div class="col"><hr></hr><img src="assets/images/icon-arrow.svg" clsss ="img-fluid rounded float-left" alt=""   @click="caculate()" ></div>
-    
+        <div  :class="{  'text-danger': danger }" >
+          <p> Month</p></div>
+
+          <div  :class="{  'text-danger': danger }" >
+            <p>YEAR</p></div>
+           <div >
+            <input :class="[status]" type="number" v-model="day" id="day" min = 1 max =31>
+           </div>
+           <div >
+            <input :class="[status]" type="number" v-model="mounth" id="mounth" min=1 max=12>
+           </div>
+           <div >
+            <input :class="[status]" type="number" v-model="year" id = "year">
+           </div>
+      <div><h4  :class="{  'error-text': danger }" v-if="is_day_invalid">{{message.day}}</h4></div>
+      <div><h4  :class="{ 'error-text': danger}" v-if=" is_month_invalid">{{message.month}}</h4></div>
+      <div> <h4  :class="{ 'error-text': danger }" v-if="is_year_invalid">{{message.year}}</h4></div>
+        <div style="flex-grow: 8;"><hr></div>
+         <div>
+          <img src="assets/images/icon-arrow.svg"
+          clsss ="img-fluid rounded " alt=""   @click="caculate()" ></div>
+         </div>
+
+
+
     <!-- <p>{{message}}</p> -->
     <h1><strong><span class = "puprel">{{result.years}} </span> Years</strong></h1>
     
@@ -49,71 +62,124 @@
     createApp({
       data() {
         return {
-          message: 'Hello Vue!',
+          message: {day:"",month:"" , years:""},
           year :"" ,
           mounth :"",
           day:"",
           result :{days:"--",months:"--",years:"--"},
-          
           status :"" ,
           danger:false ,
-      
+           is_day_invalid:false,
+           is_month_invalid:false,
+           is_year_invalid:false,
         }},
         methods: {
+   is_valid(){
+
+    if(this.day =="" ){
+      this.status ="error";
+      this.message.day = "This field is required";
+      this.is_day_invalid= true;
+      this.danger = true;
+
+    }
+  if(this.mounth =="" ){
+
+      this.status ="error";
+      this.message.month = "This field is required";
+      this.is_month_invalid= true;
+      this.danger = true;
+
+    }
+    if(this.year =="" ){
+
+      this.status ="error";
+      this.message.year = "This field is required";
+      this.is_year_invalid= true;
+      this.danger = true;
+    }
+    return ! (this.is_day_invalid
+      &&this.is_month_invalid&&this.is_year_invalid);
+    return true;
+  },
   caculate() {
     
+    if(!this.is_valid()){
+      return "";
+    }
+    // if(this.is_day_invalid
+    //        ||this.is_month_invalid
+    //        ||this.is_year_invalid){
+    //   return "";
+    // }
     event.preventDefault();
-    const today = new Date(); 
-            b = new Date(this.year, this.mounth,this.day);
-            console.log(b);
-            diff = today.getTime()-b.getTime();
-            var day = 1000 * 60 * 60 * 24;
-            var days = Math.floor(diff/day);
-            var months = Math.floor(days/31);
-            var years = Math.floor(months/12);
-            days = days-(years*360);
-            months = Math.floor(days/31);
-            days = days-(months*31);
-            this.result = {days:days,months:months,years:years};
-            return; 
-  }
-},
+    
+
+    const dob = new Date(this.year,this.mounth,this.day);
+    var dobYear = dob.getYear();  
+    var dobMonth = dob.getMonth();  
+    var dobDate = dob.getDate();
+    console.log(dobYear,dobMonth,dobDate)  
+    const now = new Date();
+    var currentYear = now.getYear();  
+    var currentMonth = now.getMonth();  
+    var currentDate = now.getDate();   
+    console.log(currentYear,currentMonth,currentDate); 
+    yearAge = currentYear - dobYear;  
+      
+    
+    if (currentMonth >= dobMonth)  
+      var monthAge = currentMonth - dobMonth;  
+    else {  
+      yearAge--;  
+      var monthAge = 12 + currentMonth - dobMonth;  
+    }  
+  
+   
+    if (currentDate >= dobDate)    
+      var dateAge = currentDate - dobDate;  
+    else {  
+      monthAge--;  
+      var dateAge = 31 + currentDate - dobDate;  
+  
+      if (monthAge < 0) {  
+        monthAge = 11;  
+        yearAge--;  
+      }  
+    }
+    this.result = {  
+    years: yearAge,  
+    months: monthAge,  
+    days: dateAge  
+    };      
+    return true;
+    
+  }},
    watch:{
     day(value){
-      if(value==""){
-      this.status ="error";
-      this.message = "This field is required";
-      this.danger = true;  
-      }
       if (value >31 ||value<1){
       this.status ="error";
-      this.message = "enter valid value";
+      this.message.day = "Must be valid day";
       this.danger = true;
+      this.is_day_invalid= true;
     }
     },
     mounth(value){
-      if(value==""){
-      this.status ="error";
-      this.message = "This field is required";
-      this.danger = true;  
-      }
+
       if  (value>12 ||value<1){
       this.status ="error";
       this.danger = true;
-      this.message = "enter valid value";
+      this.message.mounth = "Must be valid mounth";
+      this.is_month_invalid= true;
     }
   },
     year(value){
-    if(value==""){
-      this.status ="error";
-      this.message = "This field is required";
-      this.danger = true;  
-      }
     now = new Date().getFullYear();
     if  (value>now||value<1){
       this.status ="error";
       this.danger = true;
-      this.message = "enter valid value";
+      this.message.year = "Must be in past";
+      this.is_year_invalid= true;
     }},
     }}).mount('#app')
   </script>

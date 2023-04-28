@@ -12,6 +12,10 @@
 
 .flex-container {
   display: flex;
+  flex-wrap: wrap;
+    align-items: center;
+
+  flex-direction: row;
   
 }
 *, ::after, ::before {
@@ -21,15 +25,26 @@
 }
 
 
+p {
+    margin-top: 5px;
+    margin-bottom: 5px;
+    margin-right: 0px;
+    margin-left: 4px;
+    padding: 0px;
+    width: 100px;
+}
 body {
-        background-color:hsl(0, 0%, 86%);
+        background-color:hsl(0, 0%, 94%);
       }
 
 
 .container{
-    background-color:hsl(0, 0%, 94%);
+
+    margin-top: 20px;
+    background-color:;
     border: 2px solid hsl(0, 0%, 86%);
     border-radius: 5% 5% 28% 5%;
+    width: 50%;
     
 }
 
@@ -38,13 +53,18 @@ body {
     width: 110px;
     border-radius: 5px;
 }
-
-input{
-border: 2px solid hsl(0, 0%, 86%);
-width: 100px;
-height: 60px;
-border-radius: 5px;
+.text-danger{
+   color: hsl(0, 100%, 67%);
 }
+input{
+    border: 2px solid hsl(0, 0%, 86%);
+    width: 100px;
+    height: 60px;
+    border-radius: 5px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    margin-right: 0px;
+    margin-left: 4px;}
 
 *{
     font-family: 'Poppins', sans-serif;
@@ -69,19 +89,23 @@ h1{
 }
 
 
-span {
+/*p {
     margin-top: 10px;
-    font-size: 32px;
-    font-weight: 300px;
+    margin-bottom: 2px;
+    margin-left: 18px;
+    font-size: 20px;
+    font-weight: 300;
     font-style: italic;
     color:  hsl(0, 1%, 44%);
-}
+}*/
 
 img {
  background-color: hsl(259, 100%, 65%); 
  border-radius: 50%;  
  float: right;
  padding: 30px;
+ margin-left: 10px;
+ margin-top: 43px;
 }
 
 img:hover {
@@ -89,5 +113,25 @@ img:hover {
     border-radius: 50%;  
     float: right;
     padding: 30px;
+    margin-left: 10px;
+    margin-top: 43px;
    }
-   
+
+hr{
+  margin-left: 10px;
+  margin-top: 43px;
+
+}
+
+
+.error-text{
+    color:  hsl(0, 100%, 67%);
+    font-size:15px;
+    font-weight: 300;
+    display: inline-block;
+    overflow: hidden;
+    white-space: nowrap;
+    font-style: italic;
+    margin-left: 0px;
+    margin-right: 0px;
+}
